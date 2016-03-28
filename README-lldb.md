@@ -25,7 +25,7 @@ The LLDB command prompt supports all your usual debugger commands (`b`, `bt`, `s
 
 Local variable coverage can be missing at several level: julia, llvm or DWARF. To debug at the julia level, just use code_typed, etc. To debug at the llvm level, the following command sequence may be helpful:
 
-```
+```jl
 julia> using DIDebug
 julia> first(current_thread(Gallium.ctx(dbg))) |> Gallium.getASTForFrame
 Target C++> $ans->functionObject
@@ -37,7 +37,7 @@ C++> $ans->dump()
 
 To debug at the DWARF, level the following may be helpful:
 
-```
+```jl
 LLDB> jobj
 julia> oh = ans
 julia> collect(DWARF.DIETrees(ObjFileBase.debugsections(oh)))
@@ -55,7 +55,7 @@ check out the kf/gallium branch on JuliaLang/{llvm, clang, lldb} and rebuild eac
 After one of these two methods of building Julia with support for Gallium suceeds, you may need to apply
 the following patch to Cxx.jl:
 
-```
+```diff
 diff --git a/src/bootstrap.cpp b/src/bootstrap.cpp
 index 01ff792..8dca780 100644
 --- a/src/bootstrap.cpp
@@ -73,7 +73,7 @@ index 01ff792..8dca780 100644
      Cxx->CI->getLangOpts().Exceptions = 1;          // exception handling
 ```
 Finally, you'll need to run the following series of commands at the julia prompt:
-```
+```jl
 Pkg.clone("https://github.com/Keno/Cxx.jl.git")
 Pkg.build("Cxx")
 Pkg.add("Reactive")
