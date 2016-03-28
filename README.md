@@ -5,7 +5,7 @@
 # Setting a breakpoint
 
 The main entrypoint to Gallium is the breakpoint function. E.g.
-```
+```jl
 using Gallium
 include(Pkg.dir("Gallium/examples/testprograms/misc.jl"))
 Gallium.breakpoint(sinthesin,Tuple{Int64})
@@ -14,7 +14,7 @@ inaloop(2)
 
 Of course you may also use ASTInterpreter directly to start debugging
 without a breakpoint:
-```
+```jl
 using Gallium
 @enter gcd(5, 20)
 ```
@@ -22,7 +22,7 @@ using Gallium
 # Installation
 
 To install Gallium, run the following:
-```
+```jl
 Pkg.add("Reactive")
 Pkg.checkout("Reactive")
 Pkg.clone("https://github.com/Keno/ObjFileBase.jl.git")
